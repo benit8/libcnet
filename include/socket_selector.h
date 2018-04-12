@@ -1,0 +1,11 @@
+/*
+** EPITECH PROJECT, 2018
+** cnet
+** File description:
+** socket_selector.h
+*/
+
+#pragma once
+
+////////////////////////////////////////////////////////////////////////////////
+
