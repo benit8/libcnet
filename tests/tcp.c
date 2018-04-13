@@ -5,6 +5,7 @@
 ** tests / tcp_sockets.c
 */
 
+#include <ctype.h>
 #include <stdio.h>
 #include "tcp_listener.h"
 #include "tcp_socket.h"
@@ -21,7 +22,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const unsigned short PORT = 8181;
+const unsigned short PORT = 8182;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -33,6 +34,7 @@ char *read_input(void)
 	ssize_t r = getline(&input, &n, stdin);
 	if (r == -1)
 		return (NULL);
+	input[r - 1] = '\0';
 	return (input);
 }
 
@@ -99,7 +101,7 @@ void client()
 	char *out = prompt_input();
 	if (tcp_socket_send(socket, out, strlen(out)) != SOCKET_DONE)
 		return;
-	printf("Message to the server: \"%s\" (%lu)\n", out, sizeof(out));
+	printf("Message to the server: \"%s\" (%lu)\n", out, strlen(out));
 	free(out);
 
 	tcp_socket_destroy(socket);

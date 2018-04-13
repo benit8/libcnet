@@ -32,6 +32,16 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
+#ifdef EPITECH
+	#define SEND(f, d, s) (write(f, d, s))
+	#define RECV(f, d, s) (read(f, d, s))
+#else
+	#define SEND(f, d, s) (send(f, d, s, MSG_NOSIGNAL))
+	#define RECV(f, d, s) (recv(f, (char *)d, (int)s, MSG_NOSIGNAL))
+#endif
+
+////////////////////////////////////////////////////////////////////////////////
+
 typedef struct tcp_socket
 {
 	int handle;

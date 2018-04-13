@@ -28,8 +28,8 @@ socket_status_t tcp_socket_send_partial(tcp_socket_t *sock,
 		return (SOCKET_ERROR);
 	}
 	for (*sent = 0; *sent < size; *sent += result) {
-		result = send(sock->handle, (const char *)data + *sent,
-			size - *sent, MSG_NOSIGNAL);
+		result = SEND(sock->handle, (const char *)data + *sent,
+			size - *sent);
 		if (result >= 0)
 			continue;
 		s = tcp_socket_get_error_status();
@@ -51,7 +51,7 @@ socket_status_t tcp_socket_receive(tcp_socket_t *sock,
 	}
 	if (received)
 		*received = 0;
-	size_recv = recv(sock->handle, (char *)data, (int)size, MSG_NOSIGNAL);
+	size_recv = RECV(sock->handle, data, size);
 	if (size_recv > 0) {
 		if (received)
 			*received = (size_t)size_recv;
