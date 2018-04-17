@@ -27,26 +27,12 @@
 #include <unistd.h>
 
 #include "ip_address.h"
-#include "socket_status.h"
+#include "socket.h"
 #include "utils.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifdef EPITECH
-	#define SEND(f, d, s) (write(f, d, s))
-	#define RECV(f, d, s) (read(f, d, s))
-#else
-	#define SEND(f, d, s) (send(f, d, s, MSG_NOSIGNAL))
-	#define RECV(f, d, s) (recv(f, (char *)d, (int)s, MSG_NOSIGNAL))
-#endif
-
-////////////////////////////////////////////////////////////////////////////////
-
-typedef struct tcp_socket
-{
-	int handle;
-	bool blocking;
-} tcp_socket_t;
+typedef socket_t tcp_socket_t;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -101,5 +87,3 @@ socket_status_t tcp_socket_send_partial(tcp_socket_t *sock,
 // Receives data over a socket
 socket_status_t tcp_socket_receive(tcp_socket_t *sock,
 	void *data, size_t size, size_t *received);
-
-socket_status_t tcp_socket_get_error_status(void);

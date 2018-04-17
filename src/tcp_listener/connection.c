@@ -42,7 +42,7 @@ static socket_status_t do_listen(tcp_listener_t *list, tcp_socket_t *connected)
 	}
 	int remote = accept(list->handle, (struct sockaddr *)&addr, &size);
 	if (remote == -1)
-		return (tcp_listener_get_error_status());
+		return (socket_get_error_status());
 	tcp_socket_disconnect(connected);
 	tcp_socket_create_from_handle(connected, remote);
 	return (SOCKET_DONE);
@@ -53,7 +53,8 @@ socket_status_t tcp_listener_accept(tcp_listener_t *list,
 {
 	socket_status_t status;
 
-	*connected = tcp_socket_bare();
+	if (!*connected)
+		*connected = tcp_socket_bare();
 	status = do_listen(list, *connected);
 	if (status != SOCKET_DONE) {
 		tcp_socket_destroy(*connected);

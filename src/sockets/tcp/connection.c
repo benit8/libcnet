@@ -18,15 +18,15 @@ static socket_status_t wait_for_socket(tcp_socket_t *sock, int timeout)
 		if (tcp_socket_get_remote_address(sock) != IP_NONE)
 			return (SOCKET_DONE);
 	}
-	return (tcp_socket_get_error_status());
+	return (socket_get_error_status());
 }
 
 static socket_status_t connect_timeout(tcp_socket_t *sock,
 	struct sockaddr_in adr, int timeout)
 {
+	int r = 0;
 	socket_status_t s;
 	bool blocking = sock->blocking;
-	int r = 0;
 
 	if (blocking)
 		tcp_socket_set_blocking(sock, false);
@@ -35,7 +35,7 @@ static socket_status_t connect_timeout(tcp_socket_t *sock,
 		tcp_socket_set_blocking(sock, blocking);
 		return (SOCKET_DONE);
 	}
-	s = tcp_socket_get_error_status();
+	s = socket_get_error_status();
 	if (!blocking)
 		return (s);
 	if (s == SOCKET_NOT_READY)
@@ -58,7 +58,7 @@ socket_status_t tcp_socket_connect(tcp_socket_t *sock, ip_address_t address,
 	adr.sin_port = htons(port);
 	if (timeout <= 0) {
 		r = connect(sock->handle, (struct sockaddr *)&adr, sizeof(adr));
-		return (r == -1 ? tcp_socket_get_error_status() : SOCKET_DONE);
+		return (r >= 0 ? SOCKET_DONE : socket_get_error_status());
 	}
 	return (connect_timeout(sock, adr, timeout));
 }

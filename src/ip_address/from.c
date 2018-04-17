@@ -11,13 +11,13 @@ ip_address_t ip_address_from_string(const char *address)
 {
 	struct addrinfo hints;
 	struct addrinfo *result = NULL;
-	uint32_t ip;
+	ip_address_t ip = inet_addr(address);
 
 	if (strcmp(address, "255.255.255.255") == 0)
 		return (INADDR_BROADCAST);
 	else if (strcmp(address, "0.0.0.0") == 0)
 		return (INADDR_ANY);
-	if ((ip = inet_addr(address)) != INADDR_NONE)
+	if (ip != INADDR_NONE)
 		return (ip);
 	bzero(&hints, sizeof(hints));
 	hints.ai_family = AF_INET;

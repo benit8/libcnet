@@ -32,7 +32,8 @@ ip_address_t ip_address_get_local_address(void)
 }
 
 ip_address_t ip_address_get_public_address(int timeout)
-{ (void)timeout;
+{
+	(void)timeout;
 	// http_t *server = http_create("www.sfml-dev.org");
 	// http_request_t *request = http_request_create("/ip-provider.php", HTTP_REQUEST_GET);
 	// http_response_t *page = server_send_request(server, request, timeout);

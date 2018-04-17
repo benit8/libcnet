@@ -55,7 +55,7 @@ void server()
 {
 	// Create the listener
 	tcp_listener_t *listener = tcp_listener_create();
-	if (!listener)
+	if (!listener || listener->handle == -1)
 		DIE("Listener creation failed");
 
 	// Listen to a specific port
@@ -93,11 +93,15 @@ void client()
 {
 	// Create the socket
 	tcp_socket_t *socket = tcp_socket_create();
-	if (!socket)
+	if (!socket || socket->handle == -1)
 		DIE("Socket creation failed");
 
+	printf("type: %d\n", socket->type);
+	printf("handle: %d\n", socket->handle);
+	printf("blocking: %s\n", socket->blocking ? "true" : "false");
+
 	// Connect the socket
-	if (tcp_socket_connect(socket, IP_LOCALHOST, PORT, 60) != SOCKET_DONE)
+	if (tcp_socket_connect(socket, IP_LOCALHOST, PORT, 0) != SOCKET_DONE)
 		DIE("Could not connect to server");
 
 	// Receive data from the server

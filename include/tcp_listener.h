@@ -27,17 +27,12 @@
 #include <unistd.h>
 
 #include "ip_address.h"
-#include "socket_status.h"
 #include "tcp_socket.h"
 #include "utils.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 
-typedef struct tcp_listener
-{
-	int handle;
-	bool blocking;
-} tcp_listener_t;
+typedef socket_t tcp_listener_t;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -78,6 +73,3 @@ socket_status_t tcp_listener_accept(tcp_listener_t *listener,
 
 // Stop listening and close the socket
 void tcp_listener_close(tcp_listener_t *listener);
-
-
-socket_status_t tcp_listener_get_error_status(void);

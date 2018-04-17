@@ -32,8 +32,8 @@ socket_status_t tcp_socket_send_partial(tcp_socket_t *sock,
 			size - *sent);
 		if (result >= 0)
 			continue;
-		s = tcp_socket_get_error_status();
-		if ((s == SOCKET_NOT_READY) && *sent != 0)
+		s = socket_get_error_status();
+		if (s == SOCKET_NOT_READY && *sent != 0)
 			return (SOCKET_PARTIAL);
 		return (s);
 	}
@@ -59,5 +59,5 @@ socket_status_t tcp_socket_receive(tcp_socket_t *sock,
 	}
 	else if (size_recv == 0)
 		return (SOCKET_DISCONNECTED);
-	return (tcp_socket_get_error_status());
+	return (socket_get_error_status());
 }
