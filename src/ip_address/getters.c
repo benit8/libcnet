@@ -5,7 +5,8 @@
 ** ip_address / getters.c
 */
 
-#include "ip_address.h"
+#include "cnet/http.h"
+#include "cnet/ip_address.h"
 
 ip_address_t ip_address_get_local_address(void)
 {
@@ -33,12 +34,16 @@ ip_address_t ip_address_get_local_address(void)
 
 ip_address_t ip_address_get_public_address(int timeout)
 {
-	(void)timeout;
-	// http_t *server = http_create("www.sfml-dev.org");
-	// http_request_t *request = http_request_create("/ip-provider.php", HTTP_REQUEST_GET);
-	// http_response_t *page = server_send_request(server, request, timeout);
+	ip_address_t ip = IP_NONE;
+	http_t *http = http_create("ipinfo.io", 80);
+	http_request_t *req = http_request_create("/ip", HTTP_GET, NULL);
+	http_response_t *res = http_send_request(http, req, timeout);
 
-	// if (http_response_get_status(page) == HTTP_RESPONSE_OK)
-	// 	return (ip_address_from_string(http_response_get_body(page)));
-	return (IP_NONE);
+	if (res && res->status == HTTP_OK) {
+		ip = ip_address_from_string(res->body);
+		http_response_destroy(res);
+	}
+	http_request_destroy(req);
+	http_destroy(http);
+	return (ip);
 }

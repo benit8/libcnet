@@ -5,7 +5,7 @@
 ** sockets / tcp / connection.c
 */
 
-#include "tcp_socket.h"
+#include "cnet/tcp_socket.h"
 
 static socket_status_t wait_for_socket(tcp_socket_t *sock, int timeout)
 {

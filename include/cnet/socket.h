@@ -15,12 +15,8 @@
 #include <netdb.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
-#include <stdarg.h>
 #include <stdbool.h>
-#include <stdint.h>
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -31,7 +27,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#define EPITECH
+#define CNET_SOCKET
+
+////////////////////////////////////////////////////////////////////////////////
+
+// #define EPITECH
 
 #ifndef EPITECH
 	#define SEND(f, d, s) (send(f, d, s, MSG_NOSIGNAL))

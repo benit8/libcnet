@@ -5,7 +5,7 @@
 ** sockets / impl / socket.c
 */
 
-#include "socket.h"
+#include "cnet/socket.h"
 
 socket_t *socket_create(socket_type_t type)
 {

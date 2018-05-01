@@ -5,7 +5,7 @@
 ** sockets / tcp / remote.c
 */
 
-#include "tcp_socket.h"
+#include "cnet/tcp_socket.h"
 
 static struct sockaddr_in *tcp_socket_get_remote_infos(tcp_socket_t *sock)
 {

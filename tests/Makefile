@@ -14,3 +14,6 @@ LDFLAGS	+=	-lcnet
 
 .c:
 	gcc $< -o $@ $(CFLAGS) $(LDFLAGS)
+
+clean:
+	find -type f -executable -delete

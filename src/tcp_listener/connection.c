@@ -5,7 +5,7 @@
 ** tcp_listener / connection.c
 */
 
-#include "tcp_listener.h"
+#include "cnet/tcp_listener.h"
 
 socket_status_t tcp_listener_listen(tcp_listener_t *list,
 	unsigned short port, ip_address_t address)
@@ -31,7 +31,7 @@ socket_status_t tcp_listener_listen(tcp_listener_t *list,
 	return (SOCKET_DONE);
 }
 
-static socket_status_t do_listen(tcp_listener_t *list, tcp_socket_t *connected)
+static socket_status_t accept_soc(tcp_listener_t *list, tcp_socket_t *connected)
 {
 	struct sockaddr_in addr;
 	socklen_t size = sizeof(addr);
@@ -55,7 +55,7 @@ socket_status_t tcp_listener_accept(tcp_listener_t *list,
 
 	if (!*connected)
 		*connected = tcp_socket_bare();
-	status = do_listen(list, *connected);
+	status = accept_soc(list, *connected);
 	if (status != SOCKET_DONE) {
 		tcp_socket_destroy(*connected);
 		*connected = NULL;

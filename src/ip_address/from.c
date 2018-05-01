@@ -5,7 +5,7 @@
 ** ip_address / from.c
 */
 
-#include "ip_address.h"
+#include "cnet/ip_address.h"
 
 ip_address_t ip_address_from_string(const char *address)
 {
@@ -14,21 +14,21 @@ ip_address_t ip_address_from_string(const char *address)
 	ip_address_t ip = inet_addr(address);
 
 	if (strcmp(address, "255.255.255.255") == 0)
-		return (INADDR_BROADCAST);
+		return (IP_BROADCAST);
 	else if (strcmp(address, "0.0.0.0") == 0)
-		return (INADDR_ANY);
+		return (IP_ANY);
 	if (ip != INADDR_NONE)
 		return (ip);
 	bzero(&hints, sizeof(hints));
 	hints.ai_family = AF_INET;
 	if (getaddrinfo(address, NULL, &hints, &result) == 0) {
 		if (!result)
-			return (INADDR_NONE);
+			return (IP_NONE);
 		ip = ((struct sockaddr_in *)result->ai_addr)->sin_addr.s_addr;
 		freeaddrinfo(result);
 		return (ip);
 	}
-	return (INADDR_NONE);
+	return (IP_NONE);
 }
 
 ip_address_t ip_address_from_bytes(uint8_t a, uint8_t b, uint8_t c, uint8_t d)

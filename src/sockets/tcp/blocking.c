@@ -5,7 +5,7 @@
 ** sockets / tcp / blocking.c
 */
 
-#include "tcp_socket.h"
+#include "cnet/tcp_socket.h"
 
 void tcp_socket_set_blocking(tcp_socket_t *sock, bool blocking)
 {

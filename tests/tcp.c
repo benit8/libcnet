@@ -7,8 +7,8 @@
 
 #include <ctype.h>
 #include <stdio.h>
-#include "tcp_listener.h"
-#include "tcp_socket.h"
+#include "cnet/tcp_listener.h"
+#include "cnet/tcp_socket.h"
 
 ////////////////////////////////////////////////////////////////////////////////
 

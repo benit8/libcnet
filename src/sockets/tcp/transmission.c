@@ -5,7 +5,7 @@
 ** sockets / tcp / transmission.c
 */
 
-#include "tcp_socket.h"
+#include "cnet/tcp_socket.h"
 
 socket_status_t tcp_socket_send(tcp_socket_t *sock,
 	const void *data, size_t size)

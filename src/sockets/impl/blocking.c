@@ -5,7 +5,7 @@
 ** sockets / impl / blocking.c
 */
 
-#include "socket.h"
+#include "cnet/socket.h"
 
 void socket_set_blocking(socket_t *sock, bool blocking)
 {

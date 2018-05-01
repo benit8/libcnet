@@ -5,7 +5,7 @@
 ** sockets / impl / error.c
 */
 
-#include "socket.h"
+#include "cnet/socket.h"
 
 socket_status_t socket_get_error_status(void)
 {
