@@ -7,14 +7,14 @@
 
 #include "cnet/tcp_socket.h"
 
-tcp_socket_t *tcp_socket_create(void)
-{
-	return ((tcp_socket_t *)socket_create(TCP));
-}
-
 tcp_socket_t *tcp_socket_bare(void)
 {
-	return ((tcp_socket_t *)socket_bare(TCP));
+	return ((tcp_socket_t *)socket_bare(SOCKET_TCP));
+}
+
+tcp_socket_t *tcp_socket_create(void)
+{
+	return ((tcp_socket_t *)socket_create(SOCKET_TCP));
 }
 
 bool tcp_socket_create_handle(tcp_socket_t *sock)

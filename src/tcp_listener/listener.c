@@ -9,26 +9,26 @@
 
 tcp_listener_t *tcp_listener_bare(void)
 {
-	return ((tcp_listener_t *)socket_bare(TCP));
-}
-
-bool tcp_listener_create_handle(tcp_listener_t *list)
-{
-	return (socket_create_handle((socket_t *)list));
-}
-
-bool tcp_listener_create_from_handle(tcp_listener_t *list, int handle)
-{
-	return (socket_create_from_handle((socket_t *)list, handle));
+	return ((tcp_listener_t *)tcp_socket_bare());
 }
 
 tcp_listener_t *tcp_listener_create(void)
 {
-	return ((tcp_listener_t *)socket_create(TCP));
+	return ((tcp_listener_t *)tcp_socket_create());
 }
 
-void tcp_listener_destroy(tcp_listener_t *list)
+bool tcp_listener_create_handle(tcp_listener_t *listener)
 {
-	tcp_listener_close(list);
-	socket_destroy((socket_t *)list);
+	return (tcp_socket_create_handle((tcp_socket_t *)listener));
+}
+
+bool tcp_listener_create_from_handle(tcp_listener_t *listener, int handle)
+{
+	return (tcp_socket_create_from_handle((tcp_socket_t *)listener, handle));
+}
+
+void tcp_listener_destroy(tcp_listener_t *listener)
+{
+	tcp_listener_close(listener);
+	tcp_socket_destroy((tcp_socket_t *)listener);
 }

@@ -9,7 +9,7 @@
 
 void tcp_listener_set_blocking(tcp_listener_t *list, bool blocking)
 {
-	socket_set_blocking((socket_t *)list, blocking);
+	tcp_socket_set_blocking((tcp_socket_t *)list, blocking);
 }
 
 bool tcp_listener_is_blocking(tcp_listener_t *list)

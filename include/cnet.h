@@ -13,7 +13,6 @@
 #include "http.h"
 #include "ip_address.h"
 #include "packet.h"
-#include "socket.h"
 #include "socket_selector.h"
 #include "tcp_listener.h"
 #include "tcp_socket.h"

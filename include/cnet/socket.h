@@ -45,8 +45,8 @@
 
 typedef enum socket_type
 {
-	TCP,
-	UDP
+	SOCKET_TCP,
+	SOCKET_UDP
 } socket_type_t;
 
 typedef enum socket_status
@@ -69,11 +69,11 @@ typedef struct socket
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// Creates and initialize a socket
-socket_t *socket_create(socket_type_t type);
-
 // Creates an uninitialized socket
 socket_t *socket_bare(socket_type_t type);
+
+// Creates and initialize a socket
+socket_t *socket_create(socket_type_t type);
 
 // Creates the socket handle
 bool socket_create_handle(socket_t *sock);
