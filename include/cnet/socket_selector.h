@@ -41,13 +41,13 @@ void socket_selector_destroy(socket_selector_t *selector);
 void socket_selector_clear(socket_selector_t *selector);
 bool socket_selector_wait(socket_selector_t *selector, int timeout);
 
-#ifdef CNET_TCP_LISTENER
-void socket_selector_add_tcp_listener(socket_selector_t *selector,
-	tcp_listener_t *socket);
-void socket_selector_remove_tcp_listener(socket_selector_t *selector,
-	tcp_listener_t *socket);
-bool socket_selector_is_tcp_listener_ready(const socket_selector_t *selector,
-	tcp_listener_t *socket);
+#ifdef CNET_SOCKET
+void socket_selector_add_socket(socket_selector_t *selector,
+	socket_t *socket);
+void socket_selector_remove_socket(socket_selector_t *selector,
+	socket_t *socket);
+bool socket_selector_is_socket_ready(const socket_selector_t *selector,
+	socket_t *socket);
 #endif
 
 #ifdef CNET_TCP_SOCKET
@@ -66,4 +66,13 @@ void socket_selector_remove_udp_socket(socket_selector_t *selector,
 	udp_socket_t *socket);
 bool socket_selector_is_udp_socket_ready(const socket_selector_t *selector,
 	udp_socket_t *socket);
+#endif
+
+#ifdef CNET_TCP_LISTENER
+void socket_selector_add_tcp_listener(socket_selector_t *selector,
+	tcp_listener_t *socket);
+void socket_selector_remove_tcp_listener(socket_selector_t *selector,
+	tcp_listener_t *socket);
+bool socket_selector_is_tcp_listener_ready(const socket_selector_t *selector,
+	tcp_listener_t *socket);
 #endif

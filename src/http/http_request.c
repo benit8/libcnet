@@ -52,7 +52,7 @@ static void http_receive_response(http_t *http, http_response_t *response)
 static void http_init_connection(http_t *http, http_request_t *request,
 	http_response_t *response, int t)
 {
-	char *request_str = NULL;
+	char *reqstr = NULL;
 	socket_status_t s;
 
 	s = tcp_socket_connect(http->connection, http->host, http->port, t);
@@ -60,9 +60,9 @@ static void http_init_connection(http_t *http, http_request_t *request,
 		ERR("connection to host failed");
 		return;
 	}
-	request_str = http_request_prepare(request);
-	s = tcp_socket_send(http->connection, request_str, strlen(request_str));
-	free(request_str);
+	reqstr = http_request_prepare(request);
+	s = tcp_socket_send(http->connection, reqstr, strlen(reqstr), NULL);
+	free(reqstr);
 	if (s == SOCKET_DONE)
 		http_receive_response(http, response);
 	tcp_socket_disconnect(http->connection);

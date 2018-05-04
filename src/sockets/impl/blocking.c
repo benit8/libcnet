@@ -9,10 +9,15 @@
 
 void socket_set_blocking(socket_t *sock, bool blocking)
 {
-	int status;
+	int status = 0;
 
 	if (sock->handle == -1)
 		return;
+#ifdef EPITECH
+	ERR("cannot set socket blocking state under EPITECH mode");
+	(void)status;
+	(void)blocking;
+#else
 	status = fcntl(sock->handle, F_GETFL);
 	if (blocking) {
 		if (fcntl(sock->handle, F_SETFL, status & ~O_NONBLOCK) == -1)
@@ -23,6 +28,7 @@ void socket_set_blocking(socket_t *sock, bool blocking)
 			ERR("failed to unblock socket: %s", strerror(errno));
 	}
 	sock->blocking = blocking;
+#endif
 }
 
 bool socket_is_blocking(socket_t *sock)

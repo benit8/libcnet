@@ -29,7 +29,7 @@ ip_address_t ip_address_get_local_address(void)
 		return (IP_NONE);
 	}
 	close(sock);
-	return (ntohl(address.sin_addr.s_addr));
+	return (address.sin_addr.s_addr);
 }
 
 ip_address_t ip_address_get_public_address(int timeout)

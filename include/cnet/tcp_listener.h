@@ -36,18 +36,6 @@ tcp_listener_t *tcp_listener_create(void);
 // Destroys a listener
 void tcp_listener_destroy(tcp_listener_t *listener);
 
-
-// Sets the blocking state of the socket
-void tcp_listener_set_blocking(tcp_listener_t *listener, bool blocking);
-
-// Gets the blocking state of the socket
-bool tcp_listener_is_blocking(tcp_listener_t *listener);
-
-
-// Gets the local port
-unsigned short tcp_listener_get_local_port(tcp_listener_t *listener);
-
-
 // Start listening for connections
 socket_status_t tcp_listener_listen(tcp_listener_t *listener,
 	unsigned short port, ip_address_t address);
@@ -58,3 +46,10 @@ socket_status_t tcp_listener_accept(tcp_listener_t *listener,
 
 // Stop listening and close the socket
 void tcp_listener_close(tcp_listener_t *listener);
+
+// Sets/gets the blocking state of the socket
+void tcp_listener_set_blocking(tcp_listener_t *listener, bool blocking);
+bool tcp_listener_is_blocking(tcp_listener_t *listener);
+
+// Gets the local port
+unsigned short tcp_listener_get_local_port(tcp_listener_t *listener);

@@ -22,9 +22,9 @@ bool tcp_listener_create_handle(tcp_listener_t *listener)
 	return (tcp_socket_create_handle((tcp_socket_t *)listener));
 }
 
-bool tcp_listener_create_from_handle(tcp_listener_t *listener, int handle)
+bool tcp_listener_create_from_handle(tcp_listener_t *list, int handle)
 {
-	return (tcp_socket_create_from_handle((tcp_socket_t *)listener, handle));
+	return (tcp_socket_create_from_handle((tcp_socket_t *)list, handle));
 }
 
 void tcp_listener_destroy(tcp_listener_t *listener)

@@ -37,12 +37,20 @@ tcp_socket_t *tcp_socket_create(void);
 void tcp_socket_destroy(tcp_socket_t *sock);
 
 
-// Sets the blocking state of the socket
-void tcp_socket_set_blocking(tcp_socket_t *sock, bool blocking);
+// Connects the socket to a peer
+socket_status_t tcp_socket_connect(tcp_socket_t *sock, ip_address_t address,
+	unsigned short port, int timeout);
 
-// Gets the blocking state of the socket
-bool tcp_socket_is_blocking(tcp_socket_t *sock);
+// Disconnect the socket from its peer
+void tcp_socket_disconnect(tcp_socket_t *sock);
 
+// Sends data over a socket and gets the number of bytes sent
+socket_status_t tcp_socket_send(tcp_socket_t *sock,
+	const void *data, size_t size, size_t *sent);
+
+// Receives data over a socket
+socket_status_t tcp_socket_receive(tcp_socket_t *sock,
+	void *data, size_t size, size_t *received);
 
 // Gets the local port
 unsigned short tcp_socket_get_local_port(tcp_socket_t *sock);
@@ -53,22 +61,6 @@ ip_address_t tcp_socket_get_remote_address(tcp_socket_t *sock);
 // Gets the peer's port
 unsigned short tcp_socket_get_remote_port(tcp_socket_t *sock);
 
-
-// Connects the socket to a peer
-socket_status_t tcp_socket_connect(tcp_socket_t *sock,
-	ip_address_t address, unsigned short port, int timeout);
-
-// Disconnect the socket from its peer
-void tcp_socket_disconnect(tcp_socket_t *sock);
-
-// Sends data over a socket
-socket_status_t tcp_socket_send(tcp_socket_t *sock,
-	const void *data, size_t size);
-
-// Sends data over a socket and gets the number of bytes sent
-socket_status_t tcp_socket_send_partial(tcp_socket_t *sock,
-	const void *data, size_t size, size_t *sent);
-
-// Receives data over a socket
-socket_status_t tcp_socket_receive(tcp_socket_t *sock,
-	void *data, size_t size, size_t *received);
+// Sets/gets the blocking state of the socket
+void tcp_socket_set_blocking(tcp_socket_t *sock, bool blocking);
+bool tcp_socket_is_blocking(tcp_socket_t *sock);
