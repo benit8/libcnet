@@ -8,6 +8,8 @@
 PROJECT	=	cnet
 NAME	=	libcnet.a
 
+SRC_DIR	=	sources/
+
 SOURCES	=	http/http.c				\
 		http/http_request.c			\
 		http/method.c				\
