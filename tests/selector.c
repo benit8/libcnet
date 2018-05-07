@@ -43,7 +43,7 @@ int main(void)
 						printf("GET: [%s]\n", buff);
 						for (size_t j = 0; j < n; ++j) {
 							if (j == i) continue;
-							tcp_socket_send(clients[j], buff, len);
+							tcp_socket_send(clients[j], buff, len, NULL);
 						}
 					}
 				}
