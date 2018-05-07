@@ -33,20 +33,18 @@
 
 #define EPITECH
 
-// #ifndef EPITECH
-	#define SEND(f, d, s) (send(f, d, s, MSG_NOSIGNAL))
-	#define RECV(f, d, s) (recv(f, (char *)d, (int)s, MSG_NOSIGNAL))
-// #else
+#define SEND(f, d, s) (send(f, d, s, MSG_NOSIGNAL))
+#define RECV(f, d, s) (recv(f, (char *)d, (int)s, MSG_NOSIGNAL))
+
 // 	#define SEND(f, d, s) (write(f, d, s))
 // 	#define RECV(f, d, s) (read(f, d, s))
-// #endif
 
 ////////////////////////////////////////////////////////////////////////////////
 
 typedef enum socket_type
 {
-	TCP,
-	UDP
+	SOCKET_TCP,
+	SOCKET_UDP
 } socket_type_t;
 
 typedef enum socket_status
@@ -69,11 +67,11 @@ typedef struct socket
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// Creates and initialize a socket
-socket_t *socket_create(socket_type_t type);
-
 // Creates an uninitialized socket
 socket_t *socket_bare(socket_type_t type);
+
+// Creates and initialize a socket
+socket_t *socket_create(socket_type_t type);
 
 // Creates the socket handle
 bool socket_create_handle(socket_t *sock);
@@ -84,13 +82,12 @@ bool socket_create_from_handle(socket_t *sock, int handle);
 // Destroys a socket
 void socket_destroy(socket_t *sock);
 
-
-// Sets the blocking state of the socket
+// Sets/gets the blocking state of the socket
 void socket_set_blocking(socket_t *sock, bool blocking);
-
-// Gets the blocking state of the socket
 bool socket_is_blocking(socket_t *sock);
 
-
+// Get socket custom error status based on errno
 socket_status_t socket_get_error_status(void);
+
+// Converts a socket_status_t to a string. Useful for debbuging
 char *socket_status_to_string(socket_status_t status);

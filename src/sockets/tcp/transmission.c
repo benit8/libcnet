@@ -8,34 +8,25 @@
 #include "cnet/tcp_socket.h"
 
 socket_status_t tcp_socket_send(tcp_socket_t *sock,
-	const void *data, size_t size)
-{
-	size_t sent;
-
-	if (!sock->blocking)
-		ERR("Warning: Partial sends might fail.");
-	return tcp_socket_send_partial(sock, data, size, &sent);
-}
-
-socket_status_t tcp_socket_send_partial(tcp_socket_t *sock,
-	const void *data, size_t size, size_t *sent)
+	const void *data, size_t size, size_t *sentp)
 {
 	int result = 0;
+	size_t sent = 0;
 	socket_status_t s;
 
 	if (!data || (size == 0)) {
 		ERR("No data to send");
 		return (SOCKET_ERROR);
 	}
-	for (*sent = 0; *sent < size; *sent += result) {
-		result = SEND(sock->handle, (const char *)data + *sent,
-			size - *sent);
+	for (sent = 0; sent < size; sent += result) {
+		result = SEND(sock->handle, (const char *)data + sent,
+			size - sent);
+		if (sentp)
+			*sentp = sent;
 		if (result >= 0)
 			continue;
 		s = socket_get_error_status();
-		if (s == SOCKET_NOT_READY && *sent != 0)
-			return (SOCKET_PARTIAL);
-		return (s);
+		return (s == SOCKET_NOT_READY && sent > 0 ? SOCKET_PARTIAL : s);
 	}
 	return (SOCKET_DONE);
 }

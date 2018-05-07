@@ -56,11 +56,13 @@ socket_status_t tcp_socket_connect(tcp_socket_t *sock, ip_address_t address,
 	adr.sin_addr.s_addr = address;
 	adr.sin_family = AF_INET;
 	adr.sin_port = htons(port);
-	if (timeout <= 0) {
-		r = connect(sock->handle, (struct sockaddr *)&adr, sizeof(adr));
-		return (r >= 0 ? SOCKET_DONE : socket_get_error_status());
-	}
-	return (connect_timeout(sock, adr, timeout));
+#ifdef EPITECH
+	timeout = 0;
+#endif
+	if (timeout > 0)
+		return (connect_timeout(sock, adr, timeout));
+	r = connect(sock->handle, (struct sockaddr *)&adr, sizeof(adr));
+	return (r >= 0 ? SOCKET_DONE : socket_get_error_status());
 }
 
 void tcp_socket_disconnect(tcp_socket_t *sock)

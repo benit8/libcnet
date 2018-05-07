@@ -19,13 +19,14 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+#include "utils.h"
+
 ////////////////////////////////////////////////////////////////////////////////
 
 #define CNET_IP_ADDRESS
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// Arbitrary invalid ip address
 #define IP_NONE		(ip_address_from_integer(-1))
 #define IP_ANY		(ip_address_from_bytes(0, 0, 0, 0))
 #define IP_LOCALHOST	(ip_address_from_bytes(127, 0, 0, 1))
