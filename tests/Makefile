@@ -13,6 +13,7 @@ LDFLAGS	+=	-L../
 LDFLAGS	+=	-lcnet
 
 .c:
+	$(RM) $@
 	gcc $< -o $@ $(CFLAGS) $(LDFLAGS)
 
 clean:

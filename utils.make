@@ -5,17 +5,17 @@
 ## Makefile utils
 ##
 
-SOURCES	?=	main.c
-
 SRC_DIR	?=	src/
+
+SOURCES	?= main.c
 
 SRCS	=	$(addprefix $(SRC_DIR),$(SOURCES))
 OBJS	=	$(SRCS:.c=.o)
 
 ################################################################################
 
-CFLAGS	+=	-Iinclude/
 CFLAGS	+=	-W -Wall -Wextra
+CFLAGS	+=	-Iincludes/
 
 LDFLAGS	+=
 
