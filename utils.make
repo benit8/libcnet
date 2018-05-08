@@ -7,7 +7,7 @@
 
 SRC_DIR	?=	src/
 
-SOURCES	?= main.c
+SOURCES	?=	main.c
 
 SRCS	=	$(addprefix $(SRC_DIR),$(SOURCES))
 OBJS	=	$(SRCS:.c=.o)
