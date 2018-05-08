@@ -31,13 +31,11 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 
-#define EPITECH
-
 #define SEND(f, d, s) (send(f, d, s, MSG_NOSIGNAL))
 #define RECV(f, d, s) (recv(f, (char *)d, (int)s, MSG_NOSIGNAL))
 
-// 	#define SEND(f, d, s) (write(f, d, s))
-// 	#define RECV(f, d, s) (read(f, d, s))
+// #define SEND(f, d, s) (write(f, d, s))
+// #define RECV(f, d, s) (read(f, d, s))
 
 ////////////////////////////////////////////////////////////////////////////////
 

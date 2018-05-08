@@ -5,7 +5,7 @@
 ## Makefile utils
 ##
 
-SOURCES	?= main.c
+SOURCES	?=	main.c
 
 SRC_DIR	?=	src/
 
@@ -42,10 +42,11 @@ debug: CFLAGS += -g3
 debug: $(NAME)
 
 $(NAME): prebuild $(OBJS)
-	@ $(PRINT) "$(YELLOW)%b$(RESET)\n" "Building $(NAME)"
-	@ (ar rc $(NAME) $(OBJS) $(LDFLAGS) && ranlib $(NAME)) && \
-	  ($(PRINT) " => $(GREEN)Done$(RESET)\n" ; exit 0) || \
-	  ($(PRINT) " => $(RED)Fail$(RESET)\n" ; exit 1)
+	@ $(PRINT) "$(YELLOW)Building project binary$(RESET)\n"
+	@ $(PRINT) "  [  ]  $(BLUE)%b$(RESET)\\r" $(NAME)
+	@ (ar rc $(NAME) $(OBJS) && ranlib $(NAME)) && \
+	  ($(PRINT) "  [$(GREEN)OK$(RESET)]  $(CYAN)%b$(RESET)\n" $(NAME) ; exit 0) || \
+	  ($(PRINT) "  [$(RED)XX$(RESET)]  $(CYAN)%b$(RESET)\n" $(NAME) ; exit 1)
 
 prebuild:
 	@ $(PRINT) "$(YELLOW)%b$(RESET)\n" "Compiling source files"
@@ -64,8 +65,9 @@ re: fclean all
 de: fclean debug
 
 .c.o:
+	@ $(PRINT) "  [  ]  $(CYAN)%b$(RESET)\\r" $<
 	@ $(CC) -c $< -o $@ $(CFLAGS) && \
-	  ($(PRINT) "  $(GREEN)[OK]$(RESET)  $(CYAN)%b$(RESET)\n" $<) || \
-	  ($(PRINT) "  $(RED)[XX]$(RESET)  $(CYAN)%b$(RESET)\n" $< ; exit 1)
+	  ($(PRINT) "  [$(GREEN)OK$(RESET)]  $(CYAN)%b$(RESET)\n" $<) || \
+	  ($(PRINT) "  [$(RED)XX$(RESET)]  $(CYAN)%b$(RESET)\n" $< ; exit 1)
 
 .PHONY: all debug $(NAME) prebuild clean fclean re de .c.o
