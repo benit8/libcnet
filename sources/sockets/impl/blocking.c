@@ -14,7 +14,6 @@ void socket_set_blocking(socket_t *sock, bool blocking)
 	if (sock->handle == -1)
 		return;
 #ifdef EPITECH
-	ERR("cannot set socket blocking state under EPITECH mode");
 	(void)status;
 	(void)blocking;
 #else

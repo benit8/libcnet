@@ -15,6 +15,8 @@
 
 #define CNET_TCP_SOCKET
 
+#define TCP_REMOTE_STR(s) ip_address_to_string(tcp_socket_get_remote_address(s))
+
 ////////////////////////////////////////////////////////////////////////////////
 
 typedef socket_t tcp_socket_t;
