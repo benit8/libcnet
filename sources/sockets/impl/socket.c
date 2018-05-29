@@ -58,17 +58,14 @@ bool socket_create_from_handle(socket_t *sock, int handle)
 
 	sock->handle = handle;
 	socket_set_blocking(sock, sock->blocking);
-	if (sock->type == SOCKET_TCP) {
-		if (setsockopt(sock->handle, IPPROTO_TCP, TCP_NODELAY, &y, s)
-			== -1) {
-			ERR("failed to set socket option \"TCP_NODELAY\"");
-			ERR("all your TCP packets will be buffered");
-		}
+	if (sock->type == SOCKET_TCP &&
+		setsockopt(sock->handle, IPPROTO_TCP, TCP_NODELAY, &y, s) < 0) {
+		ERR("failed to set socket option \"TCP_NODELAY\"");
+		ERR("all your TCP packets will be buffered");
 	}
-	else if (sock->type == SOCKET_UDP) {
-		if (setsockopt(sock->handle, SOL_SOCKET, SO_BROADCAST, &y, s)
-			== -1)
-			ERR("failed to enable broadcast on UDP socket");
+	else if (sock->type == SOCKET_UDP &&
+		setsockopt(sock->handle, SOL_SOCKET, SO_BROADCAST, &y, s) < 0) {
+		ERR("failed to enable broadcast on UDP socket");
 	}
 	return (true);
 }
