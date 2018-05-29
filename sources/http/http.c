@@ -44,16 +44,15 @@ void http_set_host(http_t *http, const char *host, unsigned short port)
 		return;
 	if (strncasecmp(host, "http://", 7) == 0) {
 		set_host_name(&http->host_name, host + 7);
-		http->port = port != 0 ? port : 80;
+		http->port = (port != 0) ? port : PORT_HTTP;
 	}
 	else if (strncasecmp(host, "https://", 8) == 0) {
-		ERR("HTTPS protocol is not supported.");
-		set_host_name(&http->host_name, NULL);
-		http->port = 0;
+		set_host_name(&http->host_name, host + 8);
+		http->port = (port != 0) ? port : PORT_HTTPS;
 	}
 	else {
 		set_host_name(&http->host_name, host);
-		http->port = port != 0 ? port : 80;
+		http->port = (port != 0) ? port : PORT_HTTP;
 	}
 	if (http->host_name[strlen(http->host_name) - 1] == '/')
 		http->host_name[strlen(http->host_name) - 1] = '\0';
