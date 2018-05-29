@@ -33,6 +33,16 @@
 #define IP_BROADCAST	(ip_address_from_bytes(255, 255, 255, 255))
 
 #define PORT_ANY	(0)
+#define PORT_FTP	(21)
+#define PORT_SSH	(22)
+#define PORT_HTTP	(80)
+#define PORT_IRC	(194)
+#define PORT_HTTPS	(443)
+
+#define STR2IP(s)	(ip_address_from_string(s))
+#define INT2IP(i)	(ip_address_from_integer(i))
+#define IP2STR(ip)	(ip_address_to_string(ip))
+#define IP2INT(ip)	(ip_address_to_integer(ip))
 
 ////////////////////////////////////////////////////////////////////////////////
 
