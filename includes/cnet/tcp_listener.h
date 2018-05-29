@@ -53,3 +53,6 @@ bool tcp_listener_is_blocking(tcp_listener_t *listener);
 
 // Gets the local port
 unsigned short tcp_listener_get_local_port(tcp_listener_t *listener);
+
+// Gets the listened address
+ip_address_t tcp_listener_get_local_address(tcp_listener_t *list);
