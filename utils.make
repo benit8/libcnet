@@ -5,8 +5,10 @@
 ## Makefile utils
 ##
 
-SRC_DIR	?=	src/
+NAME	?=	a.out
+PROJECT	?=	$(NAME)
 
+SRC_DIR	?=	src/
 SOURCES	?=	main.c
 
 SRCS	=	$(addprefix $(SRC_DIR),$(SOURCES))
@@ -15,7 +17,7 @@ OBJS	=	$(SRCS:.c=.o)
 ################################################################################
 
 CFLAGS	+=	-W -Wall -Wextra
-CFLAGS	+=	-Iincludes/
+CFLAGS	+=	-Iinclude
 
 LDFLAGS	+=
 

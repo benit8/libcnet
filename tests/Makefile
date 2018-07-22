@@ -5,7 +5,7 @@
 ## tests / Makefile
 ##
 
-CFLAGS	+=	-I../includes/
+CFLAGS	+=	-I../include
 CFLAGS	+=	-W -Wall -Wextra
 CFLAGS	+=	-g3
 
